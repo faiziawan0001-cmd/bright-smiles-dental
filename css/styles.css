@@ -44,10 +44,10 @@ h1,h2,h3{color:var(--navy);line-height:1.1;margin:0 0 .6em}h1{font-size:var(--fs
    page scrolls, navy strip when the mobile menu is open. The floating
    capsule look is preserved for phones/tablets (<=980px) in the media
    block below, so the mobile navbar stays exactly as it was. */
-header{position:fixed;top:0;left:0;right:0;z-index:9;margin:0;padding:12px max(var(--gutter),calc((100% - var(--container))/2));background:transparent;transition:background .3s,box-shadow .3s;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px}header.sc{background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);box-shadow:0 2px 16px rgba(30,58,110,.12)}header.mo{background:#0f2548}header:is(:not(.sc),.mo) :is(.logo,nav a,.tel,.mn){color:#fff}header:is(:not(.sc),.mo) .logo small{color:#fff!important}header:is(:not(.sc),.mo) nav a.on{color:#fff}header:is(:not(.sc),.mo) nav a.on::after{background:#fff;box-shadow:0 0 10px rgba(255,255,255,.5)}header.mo nav a{border-bottom-color:#ffffff26}
-.logo{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:800;text-decoration:none;line-height:1.1;font-size:.95rem;white-space:nowrap}
+header{position:fixed;top:0;left:0;right:0;z-index:9;margin:0;padding:12px max(var(--gutter),calc((100% - var(--container))/2));background:transparent;transition:background .3s,box-shadow .3s;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px}header.sc{background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);box-shadow:0 2px 16px rgba(30,58,110,.12)}header.mo{background:#0f2548}header:is(:not(.sc),.mo) :is(nav a,.tel,.mn){color:#fff}header:is(:not(.sc),.mo) nav a.on{color:#fff}header:is(:not(.sc),.mo) nav a.on::after{background:#fff;box-shadow:0 0 10px rgba(255,255,255,.5)}header.mo nav a{border-bottom-color:#ffffff26}header:not(.sc):not(.mo) .logo{color:#fff;filter:brightness(0) invert(1)}header:not(.sc):not(.mo) .logo svg{width:36px;height:36px;stroke:var(--blue);fill:none;stroke-width:1.5;transition:stroke .35s ease}header:not(.sc):not(.mo) .logo small{font-size:.78rem;font-weight:500;letter-spacing:.03em;color:var(--blue);display:block;line-height:1.2;transition:color .35s ease}header.sc .logo{color:var(--navy);filter:none}header.sc .logo svg{width:36px;height:36px;stroke:var(--blue);fill:none;stroke-width:1.5;transition:stroke .35s ease}header.sc .logo small{font-size:.78rem;font-weight:500;letter-spacing:.03em;color:var(--blue);display:block;line-height:1.2;transition:color .35s ease}header.mo .logo{color:#fff;filter:brightness(0) invert(1)}header.mo .logo svg{width:36px;height:36px;stroke:var(--blue);fill:none;stroke-width:1.5;transition:stroke .35s ease}header.mo .logo small{font-size:.78rem;font-weight:500;letter-spacing:.03em;color:var(--blue);display:block;line-height:1.2;transition:color .35s ease}
+.logo{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:800;text-decoration:none;line-height:1.1;font-size:.95rem;white-space:nowrap;transition:color .35s ease}
 .ha{justify-self:end;display:flex;align-items:center;gap:12px}
-.logo svg{width:36px;height:36px;stroke:var(--blue);fill:none;stroke-width:1.5}
+.logo svg{width:36px;height:36px;stroke:var(--blue);fill:none;stroke-width:1.5;transition:stroke .35s ease}
 /* Header brand icon: 36px everywhere, like the reference (tiny <=360px
    phones step to 28px via the later narrow-phone block). */
 nav{display:flex;gap:4px;flex-wrap:wrap}
@@ -64,7 +64,7 @@ nav a.on::after{background:var(--blue);box-shadow:0 0 8px rgba(59,143,201,.6)}
 nav a:hover:not(.on)::after{background:currentColor;box-shadow:none}
 nav a:is(.on,:hover,:focus-visible)::after{transform:scaleX(1)}
 header.sc:not(.mo) nav a:hover:not(.on){color:var(--blue-ink)}
-.logo small{font-size:.78rem;font-weight:500;letter-spacing:.03em;color:var(--blue);display:block;line-height:1.2}
+.logo small{font-size:.78rem;font-weight:500;letter-spacing:.03em;color:var(--blue);display:block;line-height:1.2;transition:color .35s ease}
 header .btn.hb{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-size:.9rem;font-weight:700;border-radius:14px;white-space:nowrap;letter-spacing:.01em;box-shadow:0 4px 14px rgba(59,143,201,.25)}
 /* ---- Phone/tablet (<=980px): the navbar stays exactly as it was ----
    The rules above now mirror the reference desktop bar, so this block
@@ -78,7 +78,7 @@ header .btn.hb{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
   nav{align-items:center}
   nav a{font-weight:500;letter-spacing:.01em;transition:color .2s ease}
   nav a.on{color:var(--navy)}  /* active: same text color, underline-only indicator */
-  .logo small{color:var(--blue-ink)}
+  .logo small{font-size:.78rem;font-weight:500;letter-spacing:.03em;color:var(--blue);display:block;line-height:1.2;transition:color .35s ease}
 }
 .btn{display:inline-block;border:0;cursor:pointer;font:700 .95rem "Plus Jakarta Sans",sans-serif;text-decoration:none;color:#fff;background:linear-gradient(135deg,#55aae6,#2c78b4);padding:14px 26px;border-radius:14px;box-shadow:0 8px 20px rgba(59,143,201,.38);transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(59,143,201,.45)}.btn.alt{background:var(--card);color:var(--navy);box-shadow:0 4px 16px rgba(0,0,0,.1)}
@@ -1819,6 +1819,20 @@ html.js .fit-line { white-space: nowrap; }
 .months .mo-btn:not([aria-pressed="true"]):hover { background: color-mix(in srgb, var(--tint) 70%, transparent); }
 .months .mo-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 @media (hover: none) { .months .mo-btn:not([aria-pressed="true"]):hover { background: var(--card); } }
+/* --- Payment type toggle (Pay in Full vs Installments) --- */
+.pay-type-field { margin-bottom: 16px; }
+.pay-type { display: flex; gap: 8px; }
+.pay-type .pt-btn { flex: 1 1 0; border: 1px solid var(--line); background: var(--card); color: var(--navy); border-radius: 12px; padding: 12px 8px; font: 600 .88rem "Plus Jakarta Sans", sans-serif; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.pay-type .pt-btn[aria-pressed="true"] { background: linear-gradient(135deg, #55aae6, #2c78b4); color: #fff; border-color: transparent; box-shadow: 0 8px 18px rgba(59, 143, 201, .28); }
+.pay-type .pt-btn:not([aria-pressed="true"]):hover { background: color-mix(in srgb, var(--tint) 70%, transparent); }
+.pay-type .pt-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+@media (hover: none) { .pay-type .pt-btn:not([aria-pressed="true"]):hover { background: var(--card); } }
+/* When "Pay in Full" is active, hide the installment row + emi line. */
+.budget[data-mode="full"] .months-field,
+.budget[data-mode="full"] .b-emi { display: none; }
+/* When "Pay in Installments" is active, show them. */
+.budget[data-mode="inst"] .months-field,
+.budget[data-mode="inst"] .b-emi { display: block; }
 /* Contextual "Your selection" summary injected into the booking dialog */
 .bk-summary { display: flex; gap: 10px; align-items: flex-start; background: linear-gradient(160deg, var(--tint), var(--card)); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0 0 16px; }
 .bk-summary i { color: var(--blue); margin-top: 3px; }

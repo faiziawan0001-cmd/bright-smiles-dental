@@ -170,7 +170,7 @@ window.closeDialog = closeDialog;
 /* Details modal -> booking form, with that service pre-selected. */
 window.bookService = () => { closeDialog(document.getElementById("sd")); openBooking(sdSvc, { source: "service_card" }) };
 
-const open = e => { const c = e.target.closest("[data-i]"); if (!c) return; const a = S[c.dataset.i]; if (!a) return; set("#sb", `<h2>${a[0]}</h2><p>${a[2]}</p><p><b>Duration:</b> ${a[3]}</p><h3>Steps</h3><div class="tl">${a[6].map(x => `<p>${x}</p>`).join("")}</div><details open><summary>${a[7][0]}</summary><p>${a[7][1]}</p></details>`); sdSvc = a[0]; const wa = $("#sd-wa"); if (wa) wa.href = "https://wa.me/923211048740?text=" + encodeURIComponent("Hi! I would like to book an appointment for " + a[0]); openDialog(document.getElementById("sd")) };
+const open = e => { const c = e.target.closest("[data-i]"); if (!c) return; const a = S[c.dataset.i]; if (!a) return; set("#sb", `<h2>${a[0]}</h2><p>${a[2]}</p><p><b>Duration:</b> ${a[3]}</p><h3>Steps</h3><div class="tl">${a[6].map(x => `<p>${x}</p>`).join("")}</div><details open><summary>${a[7][0]}</summary><p>${a[7][1]}</p></details>`); sdSvc = a[0]; const wa = $("#sd-wa"); if (wa) wa.href = "https://wa.me/971523318584?text=" + encodeURIComponent("Hi! I would like to book an appointment for " + a[0]); openDialog(document.getElementById("sd")) };
 
 /* --- home: featured services, why-us, before/after, reviews --- */
 set("#svp", S.slice(0, 6).map(card).join(""));
@@ -205,7 +205,18 @@ if (esSel && eq && ev && eo) {
   esSel.innerHTML = S.map((x, i) => `<option value="${i}">${x[0]}</option>`).join("");
   const eqField = eq.closest(".field");
   const monthsWrap = $("#emo"), monthsBtns = monthsWrap ? [].slice.call(monthsWrap.querySelectorAll(".mo-btn")) : [];
-  let months = 6;
+  const payTypeWrap = $("#pt"), payTypeBtns = payTypeWrap ? [].slice.call(payTypeWrap.querySelectorAll(".pt-btn")) : [];
+  const monthsField = $("#emo") ? $("#emo").closest(".field") : null;
+  const budgetCard = $("#eo") ? $("#eo").closest(".budget") : null;
+  let months = 6, mode = "full";
+  const setMode = m => {
+    mode = m;
+    payTypeBtns.forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === m ? "true" : "false"));
+    if (budgetCard) budgetCard.setAttribute("data-mode", m);
+    if (monthsField) monthsField.hidden = (m === "full");
+    est();
+  };
+  payTypeBtns.forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
   const fill = () => { const p = (eq.value - eq.min) / (eq.max - eq.min) * 100; eq.style.setProperty("--fill", p + "%") };
   const est = () => {
     const a = S[esSel.value]; if (!a) return;
@@ -215,12 +226,17 @@ if (esSel && eq && ev && eo) {
     const total = a[4] * q * 100, monthly = Math.round(total / months);
     ev.textContent = q; eo.textContent = total.toLocaleString();
     if (elab) elab.textContent = per || "";
-    if (eemi) eemi.textContent = "PKR " + monthly.toLocaleString() + "/mo over " + months + " months" + (ZERO_INTEREST ? " (0% available)" : "");
+    if (eemi) {
+      if (mode === "inst") eemi.textContent = "PKR " + monthly.toLocaleString() + "/mo over " + months + " months" + (ZERO_INTEREST ? " (0% available)" : "");
+      else eemi.textContent = "";
+    }
     if (ewa) {
       let m = "Hi! I would like to book " + a[0];
       if (per) m += " (" + q + " " + per.toLowerCase() + ")";
-      m += ", estimated PKR " + total.toLocaleString() + " over " + months + " months.";
-      ewa.href = "https://wa.me/923211048740?text=" + encodeURIComponent(m);
+      m += ", estimated PKR " + total.toLocaleString();
+      if (mode === "inst") m += " over " + months + " months.";
+      m += ".";
+      ewa.href = "https://wa.me/971523318584?text=" + encodeURIComponent(m);
     }
     eo.classList.remove("pulse"); void eo.offsetWidth; eo.classList.add("pulse");
     fill()
@@ -232,8 +248,9 @@ if (esSel && eq && ev && eo) {
   window.bookEstimate = () => {
     const a = S[esSel.value]; if (!a) { openBooking(null, { source: "estimator" }); return }
     const per = PER_UNIT[a[0]], q = per ? +eq.value || 1 : 1, total = a[4] * q * 100;
-    const ctx = { estimate: total, months: months, monthly: Math.round(total / months), source: "estimator" };
+    const ctx = { estimate: total, months: months, mode: mode, source: "estimator" };
     if (per) ctx.units = q;
+    if (mode === "inst") ctx.monthly = Math.round(total / months);
     openBooking(a[0], ctx)
   };
 }
@@ -592,7 +609,7 @@ if (th) {
    Works with the existing dialog markup (#bk, #bf, #go, #n, #p, #s, #d, #e1-#e3, #ok)
    on every page, so no HTML changes are needed. The new time-slot picker and the
    success screen are built here, and their styles are injected from this file. */
-const CLINIC_WA = "923333711434", CLINIC_NAME = "Bright Smiles";
+const CLINIC_WA = "971523318584", CLINIC_NAME = "Bright Smiles";
 const bkDlg = $("#bk"), bf = $("#bf"), goBtn = $("#go");
 const bkOldOk = $("#ok");
 if (goBtn && bf && bkOldOk) {
