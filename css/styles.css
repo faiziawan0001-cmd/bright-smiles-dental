@@ -1336,7 +1336,7 @@ footer a { color: var(--blue-ink); }
 }
 .footer-brand .logo { color: #fff; }
 .footer-brand .logo small { color: #8fcdf5; font-weight: 400; }
-.footer-brand p { color: #a9bcd4; margin: 16px 0 24px; font-size: .9rem; line-height: 1.7; }
+.footer-brand p:not(.footer-credit) { color: #a9bcd4; margin: 16px 0 24px; font-size: .9rem; line-height: 1.7; }
 
 .footer-social { display: flex; gap: 12px; }
 .footer-social a {
@@ -1346,9 +1346,20 @@ footer a { color: var(--blue-ink); }
   display: flex; align-items: center; justify-content: center;
   color: #a9bcd4;
   font-size: .85rem;
-  transition: background .3s cubic-bezier(.4, 0, .2, 1), color .3s cubic-bezier(.4, 0, .2, 1);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), color .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1);
 }
-.footer-social a:hover { background: var(--blue); color: #fff; }
+.footer-social a svg { width: auto; height: 15px; display: block; fill: currentColor; }
+.footer-social a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+.footer-social a[aria-label="Instagram"]:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #fff;
+}
+.footer-social a[aria-label="Facebook"]:hover { background: #1877f2; color: #fff; }
+.footer-social a[aria-label="Clinic location"]:hover { background: #ea4335; color: #fff; }
+.footer-social a[aria-label="Email"]:hover { background: #3b8fc9; color: #fff; }
 
 /* --- Link columns --- */
 .footer-col h3 {
@@ -1397,7 +1408,7 @@ footer a { color: var(--blue-ink); }
   transition: color .3s cubic-bezier(.4, 0, .2, 1);
 }
 .footer-map-cta:hover { color: #fff; }
-.footer-map-cta i { font-size: .85em; }
+.footer-map-cta svg { width: 13px; height: 13px; flex-shrink: 0; fill: currentColor; }
 
 .footer-contact-item {
   display: flex;
@@ -1407,7 +1418,7 @@ footer a { color: var(--blue-ink); }
   font-size: .88rem;
   line-height: 1.5;
 }
-.footer-contact-item .icon { color: #8fcdf5; margin-top: 2px; flex-shrink: 0; }
+.footer-contact-item .icon { width: 14px; height: 14px; fill: currentColor; color: #8fcdf5; margin-top: 2px; flex-shrink: 0; }
 .footer-contact-item a {
   color: #a9bcd4;
   text-decoration: none;
@@ -1456,8 +1467,15 @@ footer a { color: var(--blue-ink); }
   transition: color .3s, transform .3s;
 }
 .footer-credit a:hover { color: #fff; }
-.footer-credit a i { font-size: .7em; transition: transform .3s; }
-.footer-credit a:hover i { transform: translate(1px, -1px); }
+.footer-credit a svg { width: .7em; height: .7em; fill: currentColor; transition: transform .3s; }
+.footer-credit a:hover svg { transform: translate(1px, -1px); }
+/* Desktop: the credit pill sits under the social icons. Mobile keeps the
+   original bottom-bar pill untouched (see the max-width: 768px block). */
+.footer-credit--desktop { margin: 16px 0 0; }
+.footer-credit--mobile { display: none; }
+@media (min-width: 769px) {
+  .footer-bottom { justify-content: center; }
+}
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: .6; transform: scale(1.2); }
@@ -1488,6 +1506,9 @@ footer a { color: var(--blue-ink); }
   .footer-brand-line .verified-tick { width: 18px; height: 18px; }
   .footer-social { gap: 8px; }
   .footer-social a { width: 30px; height: 30px; font-size: .75rem; }
+  .footer-social a svg { height: 12px; }
+  .footer-credit--desktop { display: none; }
+  .footer-credit--mobile { display: inline-flex; }
   .footer-col h3 { font-size: .75rem; letter-spacing: .03em; margin-bottom: 8px; }
   .footer-col ul li { margin-bottom: 4px; }
   .footer-col ul li a { font-size: .78rem; }

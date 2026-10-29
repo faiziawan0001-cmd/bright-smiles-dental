@@ -592,7 +592,7 @@ if (th) {
    Works with the existing dialog markup (#bk, #bf, #go, #n, #p, #s, #d, #e1-#e3, #ok)
    on every page, so no HTML changes are needed. The new time-slot picker and the
    success screen are built here, and their styles are injected from this file. */
-const CLINIC_WA = "923211048740", CLINIC_NAME = "Bright Smiles";
+const CLINIC_WA = "923333711434", CLINIC_NAME = "Bright Smiles";
 const bkDlg = $("#bk"), bf = $("#bf"), goBtn = $("#go");
 const bkOldOk = $("#ok");
 if (goBtn && bf && bkOldOk) {

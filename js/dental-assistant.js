@@ -21,7 +21,7 @@
   const CLINIC = {
     name: "Bright Smiles Dental Clinic",
     phone: "+92 321 1048740",
-    wa: "923211048740",
+    wa: "923333711434",
     hours: "Mon\u2013Sat 9am\u20138pm, Sunday 11am\u20135pm",
     aiEndpoint: "", /* paste your Worker URL here to enable free-form AI answers */
     treatments: [
